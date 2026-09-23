@@ -1,0 +1,165 @@
+-- select current_user;
+-- SELECT has_schema_privilege(current_user, 'public', 'USAGE'),
+--        has_schema_privilege(current_user, 'public', 'CREATE');
+
+
+-- CREATE TABLE customers (
+--     customer_id   INT PRIMARY KEY,
+--     first_name    VARCHAR(50) NOT NULL,
+--     last_name     VARCHAR(50) NOT NULL,
+--     email         VARCHAR(100),
+--     city          VARCHAR(50),
+--     signup_date   DATE
+-- );
+
+-- CREATE TABLE accounts (
+--     account_id    INT PRIMARY KEY,
+--     customer_id   INT NOT NULL REFERENCES customers(customer_id),
+--     account_type  VARCHAR(20) NOT NULL CHECK (account_type IN ('Checking','Savings', 'Credit Card')),
+--     open_date     DATE,
+--     status        VARCHAR(10) NOT NULL CHECK (status IN ('Active', 'Inactive')) DEFAULT 'Active',
+--     balance       DECIMAL(10,2) NOT NULL DEFAULT 0
+-- ); 
+
+-- CREATE TABLE categories (
+--     category_id     INT PRIMARY KEY,
+--     category_name   VARCHAR(30) NOT NULL UNIQUE,
+--     category_group  VARCHAR(10) NOT NULL
+-- );
+
+-- CREATE TABLE transactions (
+--     transaction_id  INT PRIMARY KEY,
+--     account_id      INT NOT NULL REFERENCES accounts(account_id),
+--     txn_date        DATE NOT NULL,
+--     amount          DECIMAL(10,2) NOT NULL,
+--     txn_type        VARCHAR(10) NOT NULL,
+--     category_id     INT NOT NULL REFERENCES categories(category_id),
+--     description     VARCHAR(100)
+-- );
+
+-- INSERT INTO customers (customer_id, first_name, last_name, email, city, signup_date) VALUES (1, 'Alice', 'Johnson', 'alice.johnson@email.com', 'New York', '2022-01-15');
+-- INSERT INTO customers (customer_id, first_name, last_name, email, city, signup_date) VALUES (2, 'Brian', 'Smith', 'brian.smith@email.com', 'Chicago', '2021-11-02');
+-- INSERT INTO customers (customer_id, first_name, last_name, email, city, signup_date) VALUES (3, 'Carla', 'Diaz', 'carla.diaz@email.com', 'Austin', '2023-03-22');
+-- INSERT INTO customers (customer_id, first_name, last_name, email, city, signup_date) VALUES (4, 'David', 'Chen', 'david.chen@email.com', 'Seattle', '2020-07-09');
+-- INSERT INTO customers (customer_id, first_name, last_name, email, city, signup_date) VALUES (5, 'Emma', 'Wilson', 'emma.wilson@email.com', 'Boston', '2022-09-30');
+-- INSERT INTO customers (customer_id, first_name, last_name, email, city, signup_date) VALUES (6, 'Farhan', 'Ali', 'farhan.ali@email.com', 'Houston', '2023-01-05');
+-- INSERT INTO customers (customer_id, first_name, last_name, email, city, signup_date) VALUES (7, 'Grace', 'Kim', 'grace.kim@email.com', 'Denver', '2021-05-18');
+-- INSERT INTO customers (customer_id, first_name, last_name, email, city, signup_date) VALUES (8, 'Henry', 'Lopez', 'henry.lopez@email.com', 'Miami', '2022-12-11');
+-- INSERT INTO customers (customer_id, first_name, last_name, email, city, signup_date) VALUES (9, 'Isla', 'Brown', 'isla.brown@email.com', 'Portland', '2023-06-25');
+-- INSERT INTO customers (customer_id, first_name, last_name, email, city, signup_date) VALUES (10, 'Jack', 'Turner', 'jack.turner@email.com', 'Atlanta', '2020-02-14');
+-- INSERT INTO customers (customer_id, first_name, last_name, city, signup_date) VALUES (11, 'Harshal', 'Patel', 'New York', '2022-01-15');
+-- select * from customers;
+
+-- INSERT INTO accounts (account_id, customer_id, account_type, open_date, status, balance) VALUES (101, 1, 'Checking', '2022-01-20', 'Active', 3500);
+-- INSERT INTO accounts (account_id, customer_id, account_type, open_date, status, balance) VALUES (102, 1, 'Savings', '2022-02-01', 'Active', 12000);
+-- INSERT INTO accounts (account_id, customer_id, account_type, open_date, status, balance) VALUES (103, 2, 'Checking', '2021-11-10', 'Active', 1800);
+-- INSERT INTO accounts (account_id, customer_id, account_type, open_date, status, balance) VALUES (104, 3, 'Checking', '2023-03-25', 'Active', 500);
+-- INSERT INTO accounts (account_id, customer_id, account_type, open_date, status, balance) VALUES (105, 3, 'Credit Card', '2023-04-01', 'Active', -750);
+-- INSERT INTO accounts (account_id, customer_id, account_type, open_date, status, balance) VALUES (106, 4, 'Savings', '2020-07-15', 'Active', 25000);
+-- INSERT INTO accounts (account_id, customer_id, account_type, open_date, status, balance) VALUES (107, 4, 'Checking', '2020-07-15', 'Active', 4200);
+-- INSERT INTO accounts (account_id, customer_id, account_type, open_date, status, balance) VALUES (108, 5, 'Checking', '2022-10-01', 'Active', 2100);
+-- INSERT INTO accounts (account_id, customer_id, account_type, open_date, status, balance) VALUES (109, 6, 'Credit Card', '2023-01-10', 'Active', -300);
+-- INSERT INTO accounts (account_id, customer_id, account_type, open_date, status, balance) VALUES (110, 7, 'Savings', '2021-05-20', 'Active', 8000);
+-- INSERT INTO accounts (account_id, customer_id, account_type, open_date, status, balance) VALUES (111, 7, 'Checking', '2021-05-20', 'Active', 1500);
+-- INSERT INTO accounts (account_id, customer_id, account_type, open_date, status, balance) VALUES (112, 8, 'Checking', '2022-12-15', 'Inactive', 0);
+-- INSERT INTO accounts (account_id, customer_id, account_type, open_date, status, balance) VALUES (113, 9, 'Credit Card', '2023-07-01', 'Active', -1200);
+
+-- select * from accounts;
+
+-- INSERT INTO categories (category_id, category_name, category_group) VALUES (1, 'Salary', 'Income');
+-- INSERT INTO categories (category_id, category_name, category_group) VALUES (2, 'Groceries', 'Expense');
+-- INSERT INTO categories (category_id, category_name, category_group) VALUES (3, 'Entertainment', 'Expense');
+-- INSERT INTO categories (category_id, category_name, category_group) VALUES (4, 'Utilities', 'Expense');
+-- INSERT INTO categories (category_id, category_name, category_group) VALUES (5, 'Dining Out', 'Expense');
+-- INSERT INTO categories (category_id, category_name, category_group) VALUES (6, 'Rent', 'Expense');
+-- INSERT INTO categories (category_id, category_name, category_group) VALUES (7, 'Investment Income', 'Income');
+-- INSERT INTO categories (category_id, category_name, category_group) VALUES (8, 'Shopping', 'Expense');
+
+-- select * from categories;
+
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (1, 101, '2025-01-01', 4500, 'Credit', 1, 'Monthly salary deposit');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (2, 101, '2025-01-02', -1500, 'Debit', 6, 'Rent payment');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (3, 101, '2025-01-05', -300, 'Debit', 2, 'Grocery shopping');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (4, 101, '2025-01-10', -120, 'Debit', 5, 'Dinner out');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (5, 101, '2025-01-15', -60, 'Debit', 3, 'Movie night');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (6, 101, '2025-01-20', -180, 'Debit', 4, 'Electricity & water bill');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (7, 101, '2025-02-01', 4500, 'Credit', 1, 'Monthly salary deposit');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (8, 101, '2025-02-02', -1500, 'Debit', 6, 'Rent payment');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (9, 101, '2025-02-05', -320, 'Debit', 2, 'Grocery shopping');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (10, 101, '2025-02-10', -95, 'Debit', 5, 'Dinner out');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (11, 101, '2025-02-15', -80, 'Debit', 3, 'Movie night');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (12, 101, '2025-02-20', -175, 'Debit', 4, 'Electricity & water bill');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (13, 101, '2025-03-01', 4500, 'Credit', 1, 'Monthly salary deposit');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (14, 101, '2025-03-02', -1500, 'Debit', 6, 'Rent payment');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (15, 101, '2025-03-05', -280, 'Debit', 2, 'Grocery shopping');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (16, 101, '2025-03-10', -140, 'Debit', 5, 'Dinner out');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (17, 101, '2025-03-15', -50, 'Debit', 3, 'Movie night');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (18, 101, '2025-03-20', -190, 'Debit', 4, 'Electricity & water bill');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (19, 103, '2025-01-01', 3800, 'Credit', 1, 'Monthly salary deposit');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (20, 103, '2025-01-06', -250, 'Debit', 2, 'Grocery shopping');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (21, 103, '2025-01-11', -90, 'Debit', 5, 'Restaurant');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (22, 103, '2025-01-18', -150, 'Debit', 4, 'Utility bill');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (23, 103, '2025-02-01', 3800, 'Credit', 1, 'Monthly salary deposit');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (24, 103, '2025-02-06', -260, 'Debit', 2, 'Grocery shopping');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (25, 103, '2025-02-11', -100, 'Debit', 5, 'Restaurant');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (26, 103, '2025-02-18', -155, 'Debit', 4, 'Utility bill');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (27, 103, '2025-02-22', -200, 'Debit', 8, 'Online shopping');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (28, 103, '2025-03-01', 3800, 'Credit', 1, 'Monthly salary deposit');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (29, 103, '2025-03-06', -240, 'Debit', 2, 'Grocery shopping');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (30, 103, '2025-03-11', -85, 'Debit', 5, 'Restaurant');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (31, 103, '2025-03-18', -148, 'Debit', 4, 'Utility bill');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (32, 104, '2025-01-01', 3000, 'Credit', 1, 'Monthly salary deposit');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (33, 104, '2025-01-07', -220, 'Debit', 2, 'Grocery shopping');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (34, 104, '2025-01-14', -100, 'Debit', 3, 'Concert ticket');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (35, 104, '2025-02-01', 3000, 'Credit', 1, 'Monthly salary deposit');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (36, 104, '2025-02-07', -230, 'Debit', 2, 'Grocery shopping');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (37, 104, '2025-02-14', -90, 'Debit', 3, 'Concert ticket');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (38, 107, '2025-01-01', 6000, 'Credit', 1, 'Monthly salary deposit');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (39, 107, '2025-01-02', -1800, 'Debit', 6, 'Rent payment');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (40, 107, '2025-01-05', -400, 'Debit', 2, 'Grocery shopping');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (41, 107, '2025-01-12', -180, 'Debit', 5, 'Family dinner');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (42, 107, '2025-01-19', -220, 'Debit', 4, 'Utility bill');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (43, 107, '2025-02-01', 6000, 'Credit', 1, 'Monthly salary deposit');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (44, 107, '2025-02-02', -1800, 'Debit', 6, 'Rent payment');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (45, 107, '2025-02-05', -420, 'Debit', 2, 'Grocery shopping');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (46, 107, '2025-02-12', -200, 'Debit', 5, 'Family dinner');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (47, 107, '2025-02-19', -225, 'Debit', 4, 'Utility bill');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (48, 107, '2025-02-24', -300, 'Debit', 8, 'New laptop bag');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (49, 107, '2025-03-01', 6000, 'Credit', 1, 'Monthly salary deposit');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (50, 107, '2025-03-02', -1800, 'Debit', 6, 'Rent payment');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (51, 107, '2025-03-05', -410, 'Debit', 2, 'Grocery shopping');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (52, 107, '2025-03-12', -170, 'Debit', 5, 'Family dinner');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (53, 107, '2025-03-19', -218, 'Debit', 4, 'Utility bill');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (54, 108, '2025-01-01', 3200, 'Credit', 1, 'Monthly salary deposit');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (55, 108, '2025-01-08', -260, 'Debit', 2, 'Grocery shopping');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (56, 108, '2025-01-16', -160, 'Debit', 4, 'Utility bill');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (57, 108, '2025-02-01', 3200, 'Credit', 1, 'Monthly salary deposit');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (58, 108, '2025-02-08', -270, 'Debit', 2, 'Grocery shopping');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (59, 108, '2025-02-16', -165, 'Debit', 4, 'Utility bill');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (60, 109, '2025-01-04', -300, 'Debit', 8, 'Online shopping');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (61, 109, '2025-01-13', -150, 'Debit', 5, 'Restaurant');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (62, 109, '2025-01-21', -80, 'Debit', 3, 'Streaming subscription');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (63, 109, '2025-02-04', -250, 'Debit', 8, 'Online shopping');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (64, 109, '2025-02-13', -130, 'Debit', 5, 'Restaurant');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (65, 109, '2025-02-21', -90, 'Debit', 3, 'Streaming subscription');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (66, 109, '2025-03-04', -280, 'Debit', 8, 'Online shopping');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (67, 109, '2025-03-13', -160, 'Debit', 5, 'Restaurant');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (68, 109, '2025-03-21', -70, 'Debit', 3, 'Streaming subscription');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (69, 111, '2025-01-01', 4000, 'Credit', 1, 'Monthly salary deposit');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (70, 111, '2025-01-02', -1300, 'Debit', 6, 'Rent payment');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (71, 111, '2025-01-06', -280, 'Debit', 2, 'Grocery shopping');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (72, 111, '2025-01-13', -100, 'Debit', 5, 'Lunch with friends');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (73, 111, '2025-02-01', 4000, 'Credit', 1, 'Monthly salary deposit');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (74, 111, '2025-02-02', -1300, 'Debit', 6, 'Rent payment');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (75, 111, '2025-02-06', -290, 'Debit', 2, 'Grocery shopping');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (76, 111, '2025-02-13', -110, 'Debit', 5, 'Lunch with friends');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (77, 111, '2025-02-25', 200, 'Credit', 7, 'Dividend payout');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (78, 111, '2025-03-01', 4000, 'Credit', 1, 'Monthly salary deposit');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (79, 111, '2025-03-02', -1300, 'Debit', 6, 'Rent payment');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (80, 111, '2025-03-06', -275, 'Debit', 2, 'Grocery shopping');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (81, 111, '2025-03-13', -95, 'Debit', 5, 'Lunch with friends');
+-- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (82, 111, '2025-03-25', 150, 'Credit', 7, 'Dividend payout');
+
+
+select * from transactions limit 10;
+
