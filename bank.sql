@@ -161,5 +161,52 @@
 -- INSERT INTO transactions (transaction_id, account_id, txn_date, amount, txn_type, category_id, description) VALUES (82, 111, '2025-03-25', 150, 'Credit', 7, 'Dividend payout');
 
 
-select * from transactions limit 10;
+-- select * from transactions limit 10;
+
+-- CREATE TABLE departments (
+--     id   integer PRIMARY KEY,
+--     name text NOT NULL
+-- );
+
+-- CREATE TABLE employees (
+--     id         integer PRIMARY KEY,
+--     name       text NOT NULL,
+--     dept_id    integer REFERENCES departments (id),   -- nullable on purpose
+--     manager_id integer REFERENCES employees (id),
+--     salary     numeric(10,2) NOT NULL,
+--     hire_date  date NOT NULL
+-- );
+
+-- CREATE TABLE sales (
+--     id        integer PRIMARY KEY,
+--     emp_id    integer REFERENCES employees (id),
+--     sale_date date NOT NULL,
+--     amount    numeric(10,2) NOT NULL
+-- );
+
+-- INSERT INTO departments VALUES
+--     (1, 'Engineering'), (2, 'Sales'), (3, 'HR'), (4, 'Legal');   -- Legal has no employees
+
+-- INSERT INTO employees VALUES
+--     (1, 'Alice', 1, NULL, 150000, '2018-03-01'),
+--     (2, 'Bob',   1, 1,    120000, '2019-06-15'),
+--     (3, 'Carol', 1, 1,    120000, '2020-01-10'),
+--     (4, 'Dave',  2, 1,     90000, '2019-09-01'),
+--     (5, 'Erin',  2, 4,     85000, '2021-02-20'),
+--     (6, 'Frank', 2, 4,     85000, '2022-07-11'),
+--     (7, 'Grace', NULL, 1,  70000, '2023-01-05'),             -- no department
+--     (8, 'Heidi', 3, 1,     65000, '2020-11-30');
+
+-- INSERT INTO sales VALUES
+--     (1, 4, '2026-01-05',  500),
+--     (2, 4, '2026-01-20',  700),
+--     (3, 5, '2026-01-12',  300),
+--     (4, 5, '2026-02-03',  900),
+--     (5, 6, '2026-02-14',  400),
+--     (6, 4, '2026-02-25',  650),
+--     (7, 6, '2026-03-02', 1200),
+--     (8, 5, '2026-03-15',  350);
+
+
+select count(*) from transactions;
 

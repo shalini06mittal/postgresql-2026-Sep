@@ -169,10 +169,24 @@
 -- where txn_date >= '2025-01-01'
 --   AND txn_date <  '2025-02-01';
 
-select sum(case when amount > 0 then amount else 0 end) as total_in ,
-sum(case when amount < 0 then -amount else 0 end) as total_out,
-sum(amount) as net_flow
-from transactions;
+-- select sum(case when amount > 0 then amount else 0 end) as total_in ,
+-- sum(case when amount < 0 then -amount else 0 end) as total_out,
+-- sum(amount) as net_flow
+-- from transactions;
+
+-- SELECT DISTINCT a.name
+-- FROM employees a
+-- JOIN employees b ON a.dept_id = b.dept_id AND a.salary > b.salary;
+SELECT d.*
+FROM departments d
+WHERE EXISTS (SELECT 1 FROM employees e WHERE e.dept_id = d.id);
+
+select distinct d.* from departments d join employees e on e.dept_id = d.id;
+
+SELECT name, dept_id FROM employees ORDER BY dept_id NULLS FIRST;
+-- SELECT name, dept_id FROM employees ORDER BY dept_id DESC NULLS LAST;
+
+
 
 
  
